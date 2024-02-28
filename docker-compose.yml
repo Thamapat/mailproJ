@@ -11,6 +11,10 @@ services:
       - ./html:/var/www/html
     networks:
       - mynetwork
+    depends_on:
+      - mailu
+    links:
+      - mailu
 
   # Mailu Email Service
   mailu:
