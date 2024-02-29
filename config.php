@@ -29,6 +29,13 @@ try {
     // Content
     $mail->isHTML(true);  // Set email format to HTML
 
+    // Add your email content here...
+
+    // Send the email
+    $mail->send();
+
+    echo "Message has been sent successfully!";
 } catch (Exception $e) {
     echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
 }
+
