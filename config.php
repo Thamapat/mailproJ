@@ -17,8 +17,8 @@ try {
     $mail->isSMTP();  // Send using SMTP
     $mail->Host       = 'smtp.sendgrid.net';  // Set the SMTP server to send through (SendGrid)
     $mail->SMTPAuth   = true;  // Enable SMTP authentication
-    $mail->Username   = 'your_sendgrid_username';  // SMTP username (SendGrid API Key)
-    $mail->Password   = 'your_sendgrid_password';  // SMTP password (SendGrid API Key)
+    $mail->Username   = 'thamapat';  // SMTP username (SendGrid API Key)
+    $mail->Password   = '123456';  // SMTP password (SendGrid API Key)
     $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;  // Enable TLS encryption; `PHPMailer::ENCRYPTION_SMTPS` discouraged
     $mail->Port       = 587;  // TCP port to connect to
 
@@ -29,7 +29,14 @@ try {
     // Content
     $mail->isHTML(true);  // Set email format to HTML
 
-    // Add your email content here...
+    // Subject
+    $mail->Subject = 'Subject of the Email';
+
+    // Body
+    $mail->Body = 'This is the HTML message body <b>in bold!</b>';
+
+    // AltBody
+    $mail->AltBody = 'This is the plain text version of the email content';
 
     // Send the email
     $mail->send();
