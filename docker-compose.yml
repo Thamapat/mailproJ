@@ -15,6 +15,7 @@ services:
       - mailhog
     links:
       - mailhog
+    working_dir: /var/www/html 
 
   # MailHog Email Service
   mailhog:

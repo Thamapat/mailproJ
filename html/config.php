@@ -1,5 +1,17 @@
 <?php
 
+// ตรวจสอบว่าคลาส PHPMailer ถูกโหลดเข้ามาหรือไม่
+if (!class_exists(PHPMailer\PHPMailer\PHPMailer::class)) {
+    echo 'Error: PHPMailer class not found. Make sure to run composer install.';
+    exit;
+}
+
+// ตรวจสอบว่าไฟล์ autoload.php ถูกโหลดเข้ามาหรือไม่
+if (!file_exists('vendor/autoload.php')) {
+    echo 'Error: autoload.php not found. Make sure to run composer install.';
+    exit;
+}
+
 // Include PHPMailer classes into the global namespace
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;
@@ -8,7 +20,7 @@ use PHPMailer\PHPMailer\Exception;
 // Load Composer's autoloader
 require 'vendor/autoload.php';
 
-// PHPMailer configuration
+// ตั้งค่า PHPMailer
 $mail = new PHPMailer(true);
 
 try {
