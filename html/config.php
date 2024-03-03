@@ -20,41 +20,45 @@ use PHPMailer\PHPMailer\Exception;
 // Load Composer's autoloader
 require 'vendor/autoload.php';
 
-// ตั้งค่า PHPMailer
-$mail = new PHPMailer(true);
+    // ตั้งค่า PHPMailer
+    $mail = new PHPMailer(true);
 
-try {
-    // Server settings
-    $mail->SMTPDebug = SMTP::DEBUG_OFF;  // Enable verbose debug output
-    $mail->isSMTP();  // Send using SMTP
-    $mail->Host       = 'smtp.sendgrid.net';  // Set the SMTP server to send through (SendGrid)
-    $mail->SMTPAuth   = true;  // Enable SMTP authentication
-    $mail->Username   = 'thamapat';  // SMTP username (SendGrid API Key)
-    $mail->Password   = '123456';  // SMTP password (SendGrid API Key)
-    $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;  // Enable TLS encryption; `PHPMailer::ENCRYPTION_SMTPS` discouraged
-    $mail->Port       = 587;  // TCP port to connect to
+    try {
+        // Server settings
+        $mail->SMTPDebug = SMTP::DEBUG_OFF;
+        $mail->isSMTP();
+        $mail->Host       = 'smtp.sendgrid.net';
+        $mail->SMTPAuth   = true;
+        $mail->Username   = 'thamapat'; // ใส่ SendGrid API Key หรือชื่อผู้ใช้ SMTP
+        $mail->Password   = '123456'; // ใส่ SendGrid API Key หรือรหัสผ่าน SMTP
+        $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
+        $mail->Port       = 587;
 
-    // Recipients
-    $mail->setFrom('your_email@example.com', 'Your Name');
-    $mail->addAddress('recipient@example.com', 'Recipient Name');
+        
+        $email = 'Max@example.com'; // ตั้งค่า email ที่จะส่งไป
 
-    // Content
-    $mail->isHTML(true);  // Set email format to HTML
+        // ตั้งค่าผู้รับและผู้ส่ง
+        $mail->setFrom('$to', 'Max'); // ระบุอีเมลและชื่อของผู้ส่ง
+        $mail->addAddress($email); // ระบุอีเมลของผู้รับ
 
-    // Subject
-    $mail->Subject = 'Subject of the Email';
+        // Content
+        $mail->isHTML(true);  // Set email format to HTML
 
-    // Body
-    $mail->Body = 'This is the HTML message body <b>in bold!</b>';
+        // Subject
+        $mail->Subject = 'Subject of the Email';
 
-    // AltBody
-    $mail->AltBody = 'This is the plain text version of the email content';
+        // Body
+        $mail->Body = 'This is the HTML message body <b>in bold!</b>';
 
-    // Send the email
-    $mail->send();
+        // AltBody
+        $mail->AltBody = 'This is the plain text version of the email content';
 
-    echo "Message has been sent successfully!";
-} catch (Exception $e) {
-    echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
-}
+        // Send the email
+        $mail->send();
 
+        echo "Message has been sent successfully!";
+    } catch (Exception $e) {
+        echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
+    }
+
+?>

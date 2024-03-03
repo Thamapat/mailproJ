@@ -13,9 +13,6 @@ services:
       - mynetwork
     depends_on:
       - mailhog
-    links:
-      - mailhog
-    working_dir: /var/www/html 
 
   # MailHog Email Service
   mailhog:
@@ -29,3 +26,4 @@ services:
 
 networks:
   mynetwork:
+
