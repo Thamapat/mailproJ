@@ -1,44 +1,75 @@
-<?php
-require 'vendor/autoload.php'; // นำเข้าไฟล์ PHPMailer
-require_once 'config.php'; // ให้แน่ใจว่าไฟล์ config.php ถูกเรียกใช้แล้ว
-
-use PHPMailer\PHPMailer\PHPMailer;
-use PHPMailer\PHPMailer\Exception;
-
-    if (isset($_SERVER['REQUEST_METHOD']) && $_SERVER['REQUEST_METHOD'] === 'POST') {
-        // รับข้อมูลจากฟอร์ม HTML
-        $to = $_POST['to'];
-        $subject = $_POST['subject'];
-        $message = $_POST['message'];
-
-        // สร้างอ็อบเจ็กต์ PHPMailer
-        $mail = new PHPMailer(true);
-
-        try {
-            // ตั้งค่า SMTP
-            $mail->isSMTP();
-            $mail->Host = 'mailhog'; // แก้เป็นชื่อคอนเทนเนอร์ของ MailHog
-            $mail->SMTPAuth = false;
-            $mail->Port = 1025; // พอร์ตที่ MailHog ใช้
-
-
-            // ตั้งค่าผู้รับและผู้ส่ง
-            $mail->setFrom('max@example.com', 'Max');
-            $mail->addAddress($to);
-
-            // เนื้อหาอีเมลล์
-            $mail->isHTML(true);
-            $mail->Subject = $subject;
-            $mail->Body = $message;
-
-            // ส่งอีเมลล์
-            $mail->send();
-            echo json_encode(['message' => 'Email has been sent successfully!']);
-        } catch (Exception $e) {
-            echo json_encode(['error' => "Mailer Error: {$e->getMessage()}"]);
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Email Form</title>
+    
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #ff9c9c;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
         }
-    } else {
-        // กระทำเมื่อไม่ได้รับ request แบบ POST
-        echo json_encode(['error' => "Invalid request method"]);
-    }
-?>
+    
+        form {
+            background-color: #ffb87a;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+    
+        label {
+            display: block;
+            margin-bottom: 8px;
+        }
+    
+        input, textarea {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 16px;
+            box-sizing: border-box;
+        }
+    
+        input[type="submit"] {
+            background-color: #4caf50;
+            color: white;
+            border: none;
+            padding: 10px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+    
+        input[type="submit"]:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+
+<body>
+    <form id="emailForm" method="POST" action="config.php">
+        <label for="Name">Name :</label>
+        <input type="text" id="name" name="Name" required placeholder><br>
+
+        <label for="Email">Email :</label>
+        <input type="Email" id="email" name="Email" required placeholder><br>
+        
+        <label for="to">To :</label>
+        <input type="email" id="to" name="to" required placeholder><br>
+
+        <label for="subject">Subject :</label>
+        <input type="text" id="subject" name="subject" required placeholder><br>
+
+        <label for="message">Message :</label>
+        <textarea id="message" name="message" required placeholder></textarea><br>
+
+        <input type="submit" value="SendEmail">
+    </form>
+
+</body>
+</html>

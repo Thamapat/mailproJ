@@ -52,40 +52,24 @@
 </head>
 
 <body>
-    <form id="emailForm" method="POST" action="http://localhost"> <!-- แก้เป็น URL ของเซิร์ฟเวอร์ของคุณ -->
-        <label for="to">To:</label>
+    <form id="emailForm" method="POST" action="config.php"> <!-- แก้เป็น URL ของเซิร์ฟเวอร์ของคุณ -->
+        <label for="Name">Name :</label>
+        <input type="text" id="Name" name="Name" required><br>
+
+        <label for="Email">Email :</label>
+        <input type="Email" id="Email" name="Email" required><br>
+        
+        <label for="to">To :</label>
         <input type="email" id="to" name="to" required><br>
 
-        <label for="subject">Subject:</label>
+        <label for="subject">Subject :</label>
         <input type="text" id="subject" name="subject" required><br>
 
-        <label for="message">Message:</label>
+        <label for="message">Message :</label>
         <textarea id="message" name="message" required></textarea><br>
 
-        <input type="submit" value="Send Email">
+        <button type="submit">SENDEMAIL</button>
     </form>
 
-    <script>
-        function sendEmail() {
-            const formData = new FormData(document.getElementById('emailForm'));
-
-            // Log formData to the console
-            console.log([...formData.entries()]);
-
-            // Use AJAX or Fetch API to send the form data to your server
-            fetch('http://localhost', {
-            method: 'POST',
-            body: formData
-            })
-            .then(response => response.json())
-            .then(data => {
-                alert(data.message); // Show a success message or handle errors
-            })
-            .catch(error => {
-                console.error('Error:', error);
-            });
-        }
-
-    </script>
 </body>
 </html>
