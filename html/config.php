@@ -21,12 +21,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         // Server settings
         $mail->isSMTP();
         $mail->Host = 'mailhog';
-        $mail->Port = 587;
+        $mail->Port = 1025;
         $mail->SMTPSecure = false;
         $mail->SMTPAuth   = false;
-        $mail->SMTPSecure = false;
         
-
         // ตั้งค่าผู้รับและผู้ส่ง
         $mail->setFrom($email, $name); // ระบุอีเมลและชื่อของผู้ส่ง
         $mail->addAddress($to); // ระบุอีเมลของผู้รับ

@@ -53,20 +53,21 @@
 
 <body>
     <form id="emailForm" method="POST" action="config.php">
-        <label for="Name">Name :</label>
-        <input type="text" id="name" name="Name" required placeholder><br>
-
-        <label for="Email">Email :</label>
-        <input type="Email" id="email" name="Email" required placeholder><br>
         
+        <label for="name">Name :</label>
+        <input type="text" id="name" name="name" required><br>
+
+        <label for="email">Email :</label>
+        <input type="email" id="email" name="email" required><br>
+
         <label for="to">To :</label>
-        <input type="email" id="to" name="to" required placeholder><br>
+        <input type="email" id="to" name="to" required><br>
 
         <label for="subject">Subject :</label>
-        <input type="text" id="subject" name="subject" required placeholder><br>
+        <input type="text" id="subject" name="subject" required><br>
 
         <label for="message">Message :</label>
-        <textarea id="message" name="message" required placeholder></textarea><br>
+        <textarea id="message" name="message" required></textarea><br>
 
         <input type="submit" value="SendEmail">
     </form>
